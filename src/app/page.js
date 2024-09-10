@@ -44,6 +44,9 @@ export default function ProductsPage() {
                 alt={product.title}
                 className="h-80 w-full object-cover mb-4"
               />
+              <h2 className="text-xl font-semibold mb-2">{product.title}</h2>
+              <p className="text-gray-700">{product.category}</p>
+              <p className="text-gray-900 font-bold">${product.price}</p>
             </div>
           ))}
         </div>
