@@ -19,6 +19,17 @@ export default function ProductsPage() {
     setLoading(false);
   };
 
+  useEffect(() => {
+    fetchProducts(page);
+  }, [page]);
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -38,7 +49,21 @@ export default function ProductsPage() {
         </div>
       )}
 
-      
+      <div className="flex justify-between mt-4">
+        <button
+          className="bg-gray-800 text-white px-4 py-2 rounded"
+          onClick={handlePrevPage}
+          disabled={page === 1}
+        >
+          Previous Page
+        </button>
+        <button
+          className="bg-gray-800 text-white px-4 py-2 rounded"
+          onClick={handleNextPage}
+        >
+          Next Page
+        </button>
+      </div>
     </div>
   );
 }
