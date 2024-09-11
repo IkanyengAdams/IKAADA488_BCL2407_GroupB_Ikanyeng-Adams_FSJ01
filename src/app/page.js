@@ -39,11 +39,7 @@ export default function ProductsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <div key={product.id} className="bg-white p-4 shadow-md rounded-lg">
-              <img
-                src={product.images[0]}
-                alt={product.title}
-                className="h-80 w-full object-cover mb-4"
-              />
+              <ImageCarousel images={product.images} />
               <h2 className="text-xl font-semibold mb-2">{product.title}</h2>
               <p className="text-gray-700">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
@@ -68,5 +64,21 @@ export default function ProductsPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+function ImageCarousel({ images }) {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const handleNextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+   <div className="relative w-full h-64 overflow-hidden"></div>
   );
 }

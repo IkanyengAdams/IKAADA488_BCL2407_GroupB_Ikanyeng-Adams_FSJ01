@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <html lang="en">
       <body>
-        <nav className="bg-gray-800 p-4">
+        <nav className="bg-gray-800 p-4 fixed top-0 left-0 w-full z-50">
           <div className="flex items-center">
             <a href="/" className="flex items-center">
               <img
@@ -16,7 +16,7 @@ export default function Layout({ children }) {
             </a>
           </div>
         </nav>
-        <main>{children}</main>
+        <main className="pt-16">{children}</main>
       </body>
     </html>
   );
