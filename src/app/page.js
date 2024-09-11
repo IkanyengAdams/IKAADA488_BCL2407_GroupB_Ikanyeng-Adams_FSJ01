@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link"; 
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -43,6 +44,13 @@ export default function ProductsPage() {
               <h2 className="text-xl font-semibold mb-2">{product.title}</h2>
               <p className="text-gray-700">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
+              
+             
+              <Link href={`/products/${product.id}`}>
+                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                  View Details
+                </button>
+              </Link>
             </div>
           ))}
         </div>
@@ -79,6 +87,28 @@ function ImageCarousel({ images }) {
   };
 
   return (
-   <div className="relative w-full h-64 overflow-hidden"></div>
+    <div className="relative">
+      <img
+        src={images[currentImage]}
+        alt={`Product Image ${currentImage + 1}`}
+        className="h-80 w-full object-cover mb-4"
+      />
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={handlePrevImage}
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded-full"
+          >
+            &#8249;
+          </button>
+          <button
+            onClick={handleNextImage}
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded-full"
+          >
+            &#8250;
+          </button>
+        </>
+      )}
+    </div>
   );
 }
