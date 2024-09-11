@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
+import Spinner from "./components/common/Spinner";
+
+
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -35,7 +38,7 @@ export default function ProductsPage() {
   return (
     <div className="container mx-auto p-4">
       {loading ? (
-        <p>Loading...</p>
+        <Spinner />  
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
@@ -45,7 +48,6 @@ export default function ProductsPage() {
               <p className="text-gray-700">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
               
-             
               <Link href={`/products/${product.id}`}>
                 <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                   View Details
