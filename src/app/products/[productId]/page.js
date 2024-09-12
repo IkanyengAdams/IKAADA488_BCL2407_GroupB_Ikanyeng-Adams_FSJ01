@@ -32,7 +32,7 @@ export default function ProductDetail({ params }) {
           images: data.images,
           stock: data.stock,
           availability: data.stock > 0 ? "In Stock" : "Out of Stock",
-          reviews: data.reviews,
+          reviews: data.reviews, 
           tags: data.tags || [],
         });
         setSelectedImage(data.images[0]);
@@ -82,13 +82,14 @@ export default function ProductDetail({ params }) {
             className="border-b border-gray-200 pb-4 mb-4 last:border-b-0"
           >
             <div className="flex items-center mb-2">
-              <p className="font-bold">{review.name}</p>
+              <p className="font-bold">{review.reviewerName}</p> 
               <span className="text-gray-500 ml-2">
                 {new Date(review.date).toLocaleDateString()}
               </span>
             </div>
             <div className="flex items-center mb-2">
               {renderStars(review.rating)}
+              <p className="ml-2 text-gray-600">{review.rating}/5</p> 
             </div>
             <p>{review.comment}</p>
           </div>
@@ -112,17 +113,21 @@ export default function ProductDetail({ params }) {
             />
           </div>
 
-          <div>
-  {product.images.map((image, index) => (
-    <img
-      key={index}
-      src={image}
-      alt={`${product.title} thumbnail ${index + 1}`}
-      onClick={() => setSelectedImage(image)}
-    />
-  ))}
-</div>
-
+          <div className="flex space-x-2">
+            {product.images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`${product.title} thumbnail ${index + 1}`}
+                className={`h-20 w-20 object-cover cursor-pointer rounded-md border-2 ${
+                  selectedImage === image
+                    ? "border-blue-500"
+                    : "border-transparent"
+                }`}
+                onClick={() => setSelectedImage(image)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="lg:w-2/3 w-full">
@@ -133,6 +138,7 @@ export default function ProductDetail({ params }) {
           <div className="flex items-center mb-4">
             <p className="text-gray-500 mr-2">Rating:</p>
             <div className="flex">{renderStars(product.rating)}</div>
+            <p className="ml-2 text-gray-600">{product.rating}/5</p>
           </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
 
