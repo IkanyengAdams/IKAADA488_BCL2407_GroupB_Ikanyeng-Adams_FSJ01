@@ -3,12 +3,15 @@
 import Spinner from "../../components/common/Spinner";
 import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function ProductDetail({ params }) {
   const productId = params.productId;
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -84,6 +87,14 @@ export default function ProductDetail({ params }) {
             <div className="flex">{renderStars(product.rating)}</div>
           </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
+
+          
+          <button
+            onClick={() => router.push("/")}
+            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Back to Products
+          </button>
         </div>
       </div>
     </div>
