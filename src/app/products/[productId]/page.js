@@ -32,6 +32,7 @@ export default function ProductDetail({ params }) {
           stock: data.stock,
           availability: data.stock > 0 ? "In Stock" : "Out of Stock",
           reviews: data.reviews,
+          tags: data.tags || [],
         });
         setLoading(false);
       } catch (error) {
@@ -119,10 +120,25 @@ export default function ProductDetail({ params }) {
           </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
 
-          <p className="text-green-600 mt-2">{product.availability}</p> 
-          <p className="text-gray-500">Stock: {product.stock}</p> 
+          <p className="text-green-600 mt-2">{product.availability}</p>
+          <p className="text-gray-500">Stock: {product.stock}</p>
 
-          
+          {product.tags && product.tags.length > 0 && (
+            <div className="mt-4">
+              <h3 className="font-bold text-lg mb-2">Tags:</h3>
+              <div className="flex flex-wrap">
+                {product.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full mr-2 mb-2 text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           {renderReviews(product.reviews)}
 
           <button
@@ -131,7 +147,6 @@ export default function ProductDetail({ params }) {
           >
             Back to Products
           </button>
-
         </div>
       </div>
     </div>

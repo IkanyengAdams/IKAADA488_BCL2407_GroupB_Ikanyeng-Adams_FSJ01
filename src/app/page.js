@@ -2,14 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import Spinner from "./components/common/Spinner";
 import ErrorHandler from "./components/common/ErrorHandler";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const productsPerPage = 20;
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const currentPage = parseInt(searchParams.get("page")) || 1;
 
   const fetchProducts = async (page) => {
     setLoading(true);
@@ -27,15 +32,17 @@ export default function ProductsPage() {
   };
 
   useEffect(() => {
-    fetchProducts(page);
-  }, [page]);
+    fetchProducts(currentPage);
+  }, [currentPage]);
 
   const handleNextPage = () => {
-    setPage((prevPage) => prevPage + 1);
+    router.push(`?page=${currentPage + 1}`);
   };
 
   const handlePrevPage = () => {
-    setPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+    if (currentPage > 1) {
+      router.push(`?page=${currentPage - 1}`);
+    }
   };
 
   return (
@@ -82,7 +89,7 @@ export default function ProductsPage() {
       )}
 
       <div className="flex justify-between mt-4">
-        {page > 1 && (
+        {currentPage > 1 && (
           <button
             className="bg-gray-800 text-white px-4 py-2 rounded"
             onClick={handlePrevPage}
