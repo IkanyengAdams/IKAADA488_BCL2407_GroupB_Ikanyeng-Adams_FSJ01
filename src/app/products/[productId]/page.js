@@ -2,6 +2,7 @@
 
 import Spinner from "../../components/common/Spinner";
 import { useEffect, useState } from "react";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 export default function ProductDetail({ params }) {
   const productId = params.productId;
@@ -22,6 +23,7 @@ export default function ProductDetail({ params }) {
           description: data.description,
           category: data.category,
           price: data.price,
+          rating: data.rating,
           image: data.images[0],
         });
         setLoading(false);
@@ -33,6 +35,28 @@ export default function ProductDetail({ params }) {
 
     fetchProduct();
   }, [productId]);
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating - fullStars >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<FaStar key={`full-${i}`} className="text-yellow-500" />);
+    }
+
+    if (hasHalfStar) {
+      stars.push(<FaStarHalfAlt key="half" className="text-yellow-500" />);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<FaRegStar key={`empty-${i}`} className="text-yellow-500" />);
+    }
+
+    return stars;
+  };
 
   if (loading) return <Spinner />;
   if (!product) return <p>Product not found</p>;
@@ -50,8 +74,15 @@ export default function ProductDetail({ params }) {
 
         <div className="lg:w-2/3 w-full">
           <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+
           <p className="text-gray-700 mb-4">{product.description}</p>
-          <p className="text-gray-500 mb-4">Category: {product.category}</p>
+
+          <p className="text-gray-500 mb-2">Category: {product.category}</p>
+
+          <div className="flex items-center mb-4">
+            <p className="text-gray-500 mr-2">Rating:</p>
+            <div className="flex">{renderStars(product.rating)}</div>
+          </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
         </div>
       </div>
