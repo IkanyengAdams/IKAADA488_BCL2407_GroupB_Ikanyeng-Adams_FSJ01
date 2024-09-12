@@ -69,21 +69,31 @@ export default function ProductDetail({ params }) {
     if (!reviews || reviews.length === 0) {
       return <p>No reviews available for this product.</p>;
     }
-  
+
     return (
-      <div>
-        <h2>Customer Reviews</h2>
+      <div className="mt-6">
+        <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
         {reviews.map((review, index) => (
-          <div key={index}>
-            <p>{review.name}</p>
-            <div>{renderStars(review.rating)}</div>
+          <div
+            key={index}
+            className="border-b border-gray-200 pb-4 mb-4 last:border-b-0"
+          >
+            <div className="flex items-center mb-2">
+              <p className="font-bold">{review.name}</p>
+              <span className="text-gray-500 ml-2">
+                {new Date(review.date).toLocaleDateString()}
+              </span>
+            </div>
+            <div className="flex items-center mb-2">
+              {renderStars(review.rating)}
+            </div>
             <p>{review.comment}</p>
           </div>
         ))}
       </div>
     );
   };
-  
+
   if (loading) return <Spinner />;
   if (!product) return <ErrorHandler />;
 
