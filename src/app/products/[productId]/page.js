@@ -19,7 +19,10 @@ export default function ProductDetail({ params }) {
         const data = await res.json();
         setProduct({
           title: data.title,
-         image: data.images[0],
+          description: data.description,
+          category: data.category,
+          price: data.price,
+          image: data.images[0],
         });
         setLoading(false);
       } catch (error) {
@@ -45,9 +48,11 @@ export default function ProductDetail({ params }) {
           />
         </div>
 
-        
         <div className="lg:w-2/3 w-full">
           <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+          <p className="text-gray-700 mb-4">{product.description}</p>
+          <p className="text-gray-500 mb-4">Category: {product.category}</p>
+          <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
         </div>
       </div>
     </div>
