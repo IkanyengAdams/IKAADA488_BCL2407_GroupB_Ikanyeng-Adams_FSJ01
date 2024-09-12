@@ -29,6 +29,9 @@ export default function ProductDetail({ params }) {
           price: data.price,
           rating: data.rating,
           image: data.images[0],
+          stock: data.stock,
+          availability: data.stock > 0 ? "In Stock" : "Out of Stock",
+          reviews: data.reviews,
         });
         setLoading(false);
       } catch (error) {
@@ -62,6 +65,25 @@ export default function ProductDetail({ params }) {
     return stars;
   };
 
+  const renderReviews = (reviews) => {
+    if (!reviews || reviews.length === 0) {
+      return <p>No reviews available for this product.</p>;
+    }
+  
+    return (
+      <div>
+        <h2>Customer Reviews</h2>
+        {reviews.map((review, index) => (
+          <div key={index}>
+            <p>{review.name}</p>
+            <div>{renderStars(review.rating)}</div>
+            <p>{review.comment}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
   if (loading) return <Spinner />;
   if (!product) return <ErrorHandler />;
 
@@ -78,9 +100,7 @@ export default function ProductDetail({ params }) {
 
         <div className="lg:w-2/3 w-full">
           <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-
           <p className="text-gray-700 mb-4">{product.description}</p>
-
           <p className="text-gray-500 mb-2">Category: {product.category}</p>
 
           <div className="flex items-center mb-4">
@@ -89,12 +109,19 @@ export default function ProductDetail({ params }) {
           </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
 
+          <p className="text-green-600 mt-2">{product.availability}</p> 
+          <p className="text-gray-500">Stock: {product.stock}</p> 
+
+          
+          {renderReviews(product.reviews)}
+
           <button
             onClick={() => router.push("/")}
             className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             Back to Products
           </button>
+
         </div>
       </div>
     </div>
