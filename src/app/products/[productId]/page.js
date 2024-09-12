@@ -4,6 +4,7 @@ import Spinner from "../../components/common/Spinner";
 import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import ErrorHandler from "../../components/common/ErrorHandler";
 
 export default function ProductDetail({ params }) {
   const productId = params.productId;
@@ -62,7 +63,7 @@ export default function ProductDetail({ params }) {
   };
 
   if (loading) return <Spinner />;
-  if (!product) return <p>Product not found</p>;
+  if (!product) return <ErrorHandler />;
 
   return (
     <div className="container mx-auto p-4">
@@ -88,7 +89,6 @@ export default function ProductDetail({ params }) {
           </div>
           <p className="text-gray-900 font-bold text-2xl">${product.price}</p>
 
-          
           <button
             onClick={() => router.push("/")}
             className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

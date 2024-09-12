@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Spinner from "./components/common/Spinner";
+import ErrorHandler from "./components/common/ErrorHandler"; 
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -13,11 +14,15 @@ export default function ProductsPage() {
   const fetchProducts = async (page) => {
     setLoading(true);
     const skip = (page - 1) * productsPerPage;
-    const res = await fetch(
-      `https://next-ecommerce-api.vercel.app/products?limit=${productsPerPage}&skip=${skip}`
-    );
-    const data = await res.json();
-    setProducts(data);
+    try {
+      const res = await fetch(
+        `https://next-ecommerce-api.vercel.app/products?limit=${productsPerPage}&skip=${skip}`
+      );
+      const data = await res.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
     setLoading(false);
   };
 
@@ -37,16 +42,18 @@ export default function ProductsPage() {
     <div className="container mx-auto p-4">
       {loading ? (
         <Spinner />
+      ) : products.length === 0 ? (
+        <ErrorHandler />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg" 
+              className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
             >
               <ImageCarousel images={product.images} />
-              <h2 className="text-xl font-semibold mb-2 text-black">{product.title}</h2> 
-              <p className="text-gray-800">{product.category}</p> 
+              <h2 className="text-xl font-semibold mb-2 text-black">{product.title}</h2>
+              <p className="text-gray-800">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
 
               <Link href={`/products/${product.id}`}>
