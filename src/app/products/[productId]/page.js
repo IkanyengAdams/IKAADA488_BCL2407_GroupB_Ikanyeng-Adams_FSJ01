@@ -11,6 +11,7 @@ export default function ProductDetail({ params }) {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const router = useRouter();
 
@@ -28,12 +29,13 @@ export default function ProductDetail({ params }) {
           category: data.category,
           price: data.price,
           rating: data.rating,
-          image: data.images[0],
+          images: data.images,
           stock: data.stock,
           availability: data.stock > 0 ? "In Stock" : "Out of Stock",
           reviews: data.reviews,
           tags: data.tags || [],
         });
+        setSelectedImage(data.images[0]);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -102,11 +104,25 @@ export default function ProductDetail({ params }) {
     <div className="container mx-auto p-4">
       <div className="flex flex-col lg:flex-row bg-white p-6 shadow-md rounded-lg">
         <div className="lg:w-1/3 w-full mb-4 lg:mb-0 lg:mr-4">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="h-auto w-full object-cover rounded-md"
-          />
+          <div className="mb-4">
+            <img
+              src={selectedImage}
+              alt={product.title}
+              className="h-auto w-full object-cover rounded-md"
+            />
+          </div>
+
+          <div>
+  {product.images.map((image, index) => (
+    <img
+      key={index}
+      src={image}
+      alt={`${product.title} thumbnail ${index + 1}`}
+      onClick={() => setSelectedImage(image)}
+    />
+  ))}
+</div>
+
         </div>
 
         <div className="lg:w-2/3 w-full">
