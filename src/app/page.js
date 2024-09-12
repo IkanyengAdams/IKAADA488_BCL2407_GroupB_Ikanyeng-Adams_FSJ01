@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Spinner from "./components/common/Spinner";
-import ErrorHandler from "./components/common/ErrorHandler"; 
+import ErrorHandler from "./components/common/ErrorHandler";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -40,6 +40,19 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto p-4">
+      <div className="flex justify-center mb-6">
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-full px-4 py-2 border rounded-l-md"
+          />
+          <button className="absolute right-0 top-0 h-full bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600">
+            Search
+          </button>
+        </div>
+      </div>
+
       {loading ? (
         <Spinner />
       ) : products.length === 0 ? (
@@ -52,7 +65,9 @@ export default function ProductsPage() {
               className="bg-white p-4 shadow-md rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
             >
               <ImageCarousel images={product.images} />
-              <h2 className="text-xl font-semibold mb-2 text-black">{product.title}</h2>
+              <h2 className="text-xl font-semibold mb-2 text-black">
+                {product.title}
+              </h2>
               <p className="text-gray-800">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
 
@@ -67,13 +82,14 @@ export default function ProductsPage() {
       )}
 
       <div className="flex justify-between mt-4">
-        <button
-          className="bg-gray-800 text-white px-4 py-2 rounded"
-          onClick={handlePrevPage}
-          disabled={page === 1}
-        >
-          Previous Page
-        </button>
+        {page > 1 && (
+          <button
+            className="bg-gray-800 text-white px-4 py-2 rounded"
+            onClick={handlePrevPage}
+          >
+            Previous Page
+          </button>
+        )}
         <button
           className="bg-gray-800 text-white px-4 py-2 rounded"
           onClick={handleNextPage}
