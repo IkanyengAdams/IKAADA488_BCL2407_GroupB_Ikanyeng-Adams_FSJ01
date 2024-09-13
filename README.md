@@ -47,6 +47,8 @@ Before setting up the project, ensure you have the following installed:
   URL in your web browser.
 
 # Usage Examples
+
+
 # Product Listing Page
   When you first open the app, you’ll be greeted with a list of products. The list is 
   paginated, and you can navigate between pages using "Previous" and "Next" buttons.
