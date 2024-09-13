@@ -1,8 +1,9 @@
-"use client"; 
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import Spinner from "./components/common/Spinner";
 import ErrorHandler from "./components/common/ErrorHandler";
 
@@ -78,11 +79,18 @@ export default function ProductsPage() {
               <p className="text-gray-800">{product.category}</p>
               <p className="text-gray-900 font-bold">${product.price}</p>
 
-              <Link href={`/products/${product.id}`}>
-                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                  View Details
-                </button>
-              </Link>
+              <div className="flex justify-center mt-4">
+                <Link href={`/products/${product.id}`}>
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    View Product
+                  </button>
+                </Link>
+              </div>
+
+              <div className="flex justify-center space-x-4 mt-2">
+                <FaHeart className="text-gray-400 text-xl" />{" "}
+                <FaShoppingCart className="text-gray-400 text-xl" />{" "}
+              </div>
             </div>
           ))}
         </div>
