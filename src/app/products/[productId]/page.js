@@ -6,6 +6,12 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ErrorHandler from "../../components/common/ErrorHandler";
 
+/**
+ * ProductDetail component displays the details of a single product including images, rating, and reviews.
+ * @param {Object} props - The props object for the ProductDetail component.
+ * @param {Object} props.params - The dynamic route parameters containing the productId.
+ * @returns {JSX.Element} The ProductDetail component.
+ */
 export default function ProductDetail({ params }) {
   const productId = params.productId;
 
@@ -15,6 +21,9 @@ export default function ProductDetail({ params }) {
 
   const router = useRouter();
 
+  /**
+   * Fetches the product details based on the productId.
+   */
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -46,6 +55,11 @@ export default function ProductDetail({ params }) {
     fetchProduct();
   }, [productId]);
 
+  /**
+   * Renders stars based on the product's rating.
+   * @param {number} rating - The product's rating out of 5.
+   * @returns {JSX.Element[]} An array of star icons based on the rating.
+   */
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating - fullStars >= 0.5;
@@ -68,6 +82,11 @@ export default function ProductDetail({ params }) {
     return stars;
   };
 
+  /**
+   * Renders customer reviews for the product.
+   * @param {Object[]} reviews - An array of review objects containing reviewerName, date, rating, and comment.
+   * @returns {JSX.Element} The reviews section of the component.
+   */
   const renderReviews = (reviews) => {
     if (!reviews || reviews.length === 0) {
       return <p>No reviews available for this product.</p>;
