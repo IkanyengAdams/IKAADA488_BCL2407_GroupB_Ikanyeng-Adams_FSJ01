@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * ErrorComponent displays an error message when no products are found.
+ * It shows an icon and a message indicating that no products are currently available.
+ * @returns {JSX.Element} A full-screen error message component.
+ */
 export default function ErrorComponent() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
@@ -22,6 +27,7 @@ export default function ErrorComponent() {
         <h1 className="text-2xl font-bold text-gray-700 mb-2">
           No product(s) found
         </h1>
+
         <p className="text-gray-500">
           It seems like there are no products available at the moment.
         </p>
