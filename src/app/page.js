@@ -7,6 +7,10 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import Spinner from "./components/common/Spinner";
 import ErrorHandler from "./components/common/ErrorHandler";
 
+/**
+ * Displays a page of products with pagination, search functionality, and product cards.
+ * @returns {JSX.Element} The ProductsPage component.
+ */
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,6 +21,10 @@ export default function ProductsPage() {
 
   const currentPage = parseInt(searchParams.get("page")) || 1;
 
+  /**
+   * Fetches products from the API for the current page.
+   * @param {number} page - The current page number.
+   */
   const fetchProducts = async (page) => {
     setLoading(true);
     const skip = (page - 1) * productsPerPage;
@@ -32,14 +40,21 @@ export default function ProductsPage() {
     setLoading(false);
   };
 
+  // Fetch products when the current page changes.
   useEffect(() => {
     fetchProducts(currentPage);
   }, [currentPage]);
 
+  /**
+   * Navigates to the next page of products.
+   */
   const handleNextPage = () => {
     router.push(`?page=${currentPage + 1}`);
   };
 
+  /**
+   * Navigates to the previous page of products.
+   */
   const handlePrevPage = () => {
     if (currentPage > 1) {
       router.push(`?page=${currentPage - 1}`);
@@ -116,13 +131,25 @@ export default function ProductsPage() {
   );
 }
 
+/**
+ * ImageCarousel component to display images in a carousel.
+ * @param {Object} props - The props for the ImageCarousel component.
+ * @param {string[]} props.images - Array of image URLs for the product.
+ * @returns {JSX.Element} The ImageCarousel component.
+ */
 function ImageCarousel({ images }) {
   const [currentImage, setCurrentImage] = useState(0);
 
+  /**
+   * Moves to the next image in the carousel.
+   */
   const handleNextImage = () => {
     setCurrentImage((prev) => (prev + 1) % images.length);
   };
 
+  /**
+   * Moves to the previous image in the carousel.
+   */
   const handlePrevImage = () => {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
   };
