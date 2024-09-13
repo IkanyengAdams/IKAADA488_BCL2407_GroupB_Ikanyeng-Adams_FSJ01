@@ -37,8 +37,8 @@ Before setting up the project, ensure you have the following installed:
 
 # Steps to Run Locally
 1.Clone the Repository:
-  git clone https://github.com/yourusername/swiftcart.git
-  cd swiftcart
+  git clone [https://github.com/yourusername/swiftcart.git](https://github.com/IkanyengAdams/IKAADA488_BCL2407_GroupB_Ikanyeng-Adams_FSJ01.git)
+  cd ./IKAADA488_BCL2407_GroupB_Ikanyeng-Adams_FSJ01
 2.Install Dependencies Once inside the project directory, install the required packages:
   npm install
 3.Run the Development Server After installing the dependencies, start the development server
@@ -47,8 +47,9 @@ Before setting up the project, ensure you have the following installed:
   URL in your web browser.
 
 # Usage Examples
-
-
+![Screenshot 2024-09-13 151312](https://github.com/user-attachments/assets/6c89d5cf-09cb-4b86-9455-3845ae95bd3c)
+![Screenshot 2024-09-13 151407](https://github.com/user-attachments/assets/2af947c7-7008-45ae-8e3c-9c8d2169466f)
+![Screenshot 2024-09-13 151452](https://github.com/user-attachments/assets/f7b6259d-e5b7-4b07-a4a9-dc48f6e4db9e)
 # Product Listing Page
   When you first open the app, you’ll be greeted with a list of products. The list is 
   paginated, and you can navigate between pages using "Previous" and "Next" buttons.
