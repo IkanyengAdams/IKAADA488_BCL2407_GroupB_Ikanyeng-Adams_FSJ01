@@ -32,7 +32,7 @@ export default function ProductDetail({ params }) {
           images: data.images,
           stock: data.stock,
           availability: data.stock > 0 ? "In Stock" : "Out of Stock",
-          reviews: data.reviews, 
+          reviews: data.reviews,
           tags: data.tags || [],
         });
         setSelectedImage(data.images[0]);
@@ -82,14 +82,14 @@ export default function ProductDetail({ params }) {
             className="border-b border-gray-200 pb-4 mb-4 last:border-b-0"
           >
             <div className="flex items-center mb-2">
-              <p className="font-bold">{review.reviewerName}</p> 
+              <p className="font-bold">{review.reviewerName}</p>
               <span className="text-gray-500 ml-2">
                 {new Date(review.date).toLocaleDateString()}
               </span>
             </div>
             <div className="flex items-center mb-2">
               {renderStars(review.rating)}
-              <p className="ml-2 text-gray-600">{review.rating}/5</p> 
+              <p className="ml-2 text-gray-600">{review.rating}/5</p>
             </div>
             <p>{review.comment}</p>
           </div>
@@ -104,7 +104,14 @@ export default function ProductDetail({ params }) {
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col lg:flex-row bg-white p-6 shadow-md rounded-lg">
-        <div className="lg:w-1/3 w-full mb-4 lg:mb-0 lg:mr-4">
+        <div className="relative lg:w-1/3 w-full mb-4 lg:mb-0 lg:mr-4">
+          <button
+            onClick={() => router.push("/")}
+            className="absolute -top-6 left-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 z-10"
+          >
+            Back to Products
+          </button>
+
           <div className="mb-4">
             <img
               src={selectedImage}
@@ -162,13 +169,6 @@ export default function ProductDetail({ params }) {
           )}
 
           {renderReviews(product.reviews)}
-
-          <button
-            onClick={() => router.push("/")}
-            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Back to Products
-          </button>
         </div>
       </div>
     </div>
