@@ -4,27 +4,41 @@ SwiftCart is a responsive, dynamic e-commerce platform built with Next.js and Re
 
 # Table of Contents
 -Technologies Used
+
 -Features
+
 -Setup Instructions
+
 -Usage Examples
 
 # Technologies Used
 This project utilizes a variety of modern technologies to ensure a smooth and efficient experience for both users and developers.
 
 -Next.js: For building server-side rendered and statically generated pages.
+
 -React.js: For creating interactive user interfaces with a component-based architecture.
+
 -Tailwind CSS: For utility-first, responsive styling.
+
 -React Icons: For adding dynamic icons to the interface.
+
 -Vercel API: For fetching products from a mock API.
+
 -Fa Icons (Font Awesome): For adding icons to the cart, wishlist, and user profile sections.
 
 # Features
 -Responsive Layout: Adapts to all screen sizes, from mobile to desktop.
+
 -Product Listing: Displays a paginated list of products fetched from a remote API.
+
 -Product Details: Includes detailed product information, such as price, description, and images.
+
 -Carousel for Images: Enables users to navigate through product images.
+
 -Error Handling: Custom error messages for scenarios where products or data cannot be fetched.
+
 -Loading Spinner: Displays a spinner while content is loading.
+
 -Reviews and Ratings: Displays customer reviews and ratings for each product.
 
 # Setup Instructions
@@ -32,17 +46,22 @@ This project utilizes a variety of modern technologies to ensure a smooth and ef
 Before setting up the project, ensure you have the following installed:
 
 -Node.js (v14.x or above)
+
 -npm (v6.x or above)
+
 -Git
 
 # Steps to Run Locally
 1.Clone the Repository:
   git clone [https://github.com/yourusername/swiftcart.git](https://github.com/IkanyengAdams/IKAADA488_BCL2407_GroupB_Ikanyeng-Adams_FSJ01.git)
   cd ./IKAADA488_BCL2407_GroupB_Ikanyeng-Adams_FSJ01
+  
 2.Install Dependencies Once inside the project directory, install the required packages:
   npm install
+  
 3.Run the Development Server After installing the dependencies, start the development server
   npm run dev
+  
 4.Open the Project in a Browser The app will run on http://localhost:3000 by default. Open this 
   URL in your web browser.
 
